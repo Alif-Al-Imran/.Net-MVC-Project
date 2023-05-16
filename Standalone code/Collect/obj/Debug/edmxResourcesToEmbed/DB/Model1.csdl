@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CustomModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="CE">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="cid" Type="Int32" Nullable="false" />
+    <Property Name="eid" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Creq" Relationship="Self.FK_CE_Creq" FromRole="CE" ToRole="Creq" />
+    <NavigationProperty Name="Emp" Relationship="Self.FK_CE_Emp" FromRole="CE" ToRole="Emp" />
+  </EntityType>
+  <EntityType Name="Clist">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Rname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Ptime" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Ename" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Creq">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Rname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Ptime" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="CEs" Relationship="Self.FK_CE_Creq" FromRole="Creq" ToRole="CE" />
+  </EntityType>
+  <EntityType Name="Emp">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Ename" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="CEs" Relationship="Self.FK_CE_Emp" FromRole="Emp" ToRole="CE" />
+  </EntityType>
+  <Association Name="FK_CE_Creq">
+    <End Role="Creq" Type="Self.Creq" Multiplicity="1" />
+    <End Role="CE" Type="Self.CE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Creq">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CE">
+        <PropertyRef Name="cid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CE_Emp">
+    <End Role="Emp" Type="Self.Emp" Multiplicity="1" />
+    <End Role="CE" Type="Self.CE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Emp">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CE">
+        <PropertyRef Name="eid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="CustomEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CEs" EntityType="Self.CE" />
+    <EntitySet Name="Clists" EntityType="Self.Clist" />
+    <EntitySet Name="Creqs" EntityType="Self.Creq" />
+    <EntitySet Name="Emps" EntityType="Self.Emp" />
+    <AssociationSet Name="FK_CE_Creq" Association="Self.FK_CE_Creq">
+      <End Role="Creq" EntitySet="Creqs" />
+      <End Role="CE" EntitySet="CEs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CE_Emp" Association="Self.FK_CE_Emp">
+      <End Role="Emp" EntitySet="Emps" />
+      <End Role="CE" EntitySet="CEs" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

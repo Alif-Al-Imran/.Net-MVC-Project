@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CustomModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CE">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="cid" Type="int" Nullable="false" />
+    <Property Name="eid" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Clist">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Rname" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Ptime" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Ename" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Status" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Creq">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Rname" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Ptime" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Status" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Emp">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Ename" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Status" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_CE_Creq">
+    <End Role="Creq" Type="Self.Creq" Multiplicity="1" />
+    <End Role="CE" Type="Self.CE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Creq">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CE">
+        <PropertyRef Name="cid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CE_Emp">
+    <End Role="Emp" Type="Self.Emp" Multiplicity="1" />
+    <End Role="CE" Type="Self.CE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Emp">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CE">
+        <PropertyRef Name="eid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="CustomModelStoreContainer">
+    <EntitySet Name="CE" EntityType="Self.CE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Clist" EntityType="Self.Clist" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Creq" EntityType="Self.Creq" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Emp" EntityType="Self.Emp" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_CE_Creq" Association="Self.FK_CE_Creq">
+      <End Role="Creq" EntitySet="Creq" />
+      <End Role="CE" EntitySet="CE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CE_Emp" Association="Self.FK_CE_Emp">
+      <End Role="Emp" EntitySet="Emp" />
+      <End Role="CE" EntitySet="CE" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

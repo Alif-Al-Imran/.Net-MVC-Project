@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewBag.Title = "All collections";
+}
+
+<h2>All collections</h2>
+<table class="table table-bordered">
+    <tr>
+        <th>Id</th>
+        <th>Restaurant Name</th>
+        <th>Preserve Time</th>
+        <th>Status</th>
+        <th>Employee assigned</th>
+    </tr>
+    @foreach (var c in Model)
+    {
+        <tr>
+            <th>@c.Id</th>
+            <th>@c.Rname</th>
+            <th>@c.Ptime</th>
+            <th>@c.Status</th>
+            <th>@c.Ename</th>
+        </tr>
+    }
+</table>
+

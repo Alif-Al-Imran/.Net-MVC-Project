@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "Collect List";
+}
+
+<h2>Collect List</h2>
+<span class="alert alert-info">@TempData["msg"]</span>
+<br /><br />
+<table class="table table-bordered">
+    <tr>
+        <th>Id</th>
+        <th>Restaurant Name</th>
+        <th>Preserve Time</th>
+        <th>Status</th>
+        <th></th>
+    </tr>
+    @foreach (var c in Model)
+    {
+        <tr>
+            <th>@c.Id</th>
+            <th>@c.Rname</th>
+            <th>@c.Ptime</th>
+            <th>@c.Status</th>
+            <th><a href="/ngo/accept/@c.Id" class="btn btn-info">Accept</a></th>
+            
+        </tr>
+    }
+</table>

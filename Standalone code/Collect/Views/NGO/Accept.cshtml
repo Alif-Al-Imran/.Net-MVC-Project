@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "Accept";
+}
+
+<h2>Accept</h2>
+<form action="" method="post">
+    <input type="text" name="Id" value="@Model.Id" placeholder="Id" class="form-control" readonly/>
+    <input type="text" name="RName" value="@Model.Rname" placeholder="Rname" class="form-control" readonly/>
+    <input type="text" name="Ptime" value="@Model.Ptime" placeholder="Ptime" class="form-control" readonly/>
+    <label>Select Employee ID</label>
+    <select name="EmpID">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+
+    </select>
+    <input type="submit" value="Submit" class="btn btn-danger" />
+
+</form>
+

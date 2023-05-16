@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "Open Collect Requests";
+}
+
+<h2>Open Collect Requests</h2>
+<span class="alert alert-info">@TempData["msg"]</span>
+<br /><br />
+<table class="table table-bordered">
+    <tr>
+        <th>Id</th>
+        <th>Restaurant Name</th>
+        <th>Preserve Time</th>
+        <th>Status</th>
+    </tr>
+    @foreach (var c in Model)
+    {
+        <tr>
+            <th>@c.Id</th>
+            <th>@c.Rname</th>
+            <th>@c.Ptime</th>
+            <th>@c.Status</th>
+        </tr>
+    }
+</table>
+<a href="/restaurant/create" class="btn btn-info">Create</a>
+
